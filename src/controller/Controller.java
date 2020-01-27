@@ -67,7 +67,7 @@ public class Controller {
 				result.setExponent(value2);
 				solutionFrame.setResult(result.compute());
 			} catch(NumberFormatException exception) {
-				JOptionPane.showMessageDialog(mainFrame,"Invalid input!");
+				JOptionPane.showMessageDialog(mainFrame,"Invalid input! Consider just numbers!");
 			}
 				
 		}

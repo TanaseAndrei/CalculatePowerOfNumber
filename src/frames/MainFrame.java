@@ -1,12 +1,16 @@
 package frames;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -21,6 +25,7 @@ public class MainFrame extends JFrame{
 	 * Main components of the frame
 	 */
 	private JTextField field1, field2;
+	private JLabel label1, label2;
 	private JButton executeButton, closeButton;
 	private JCheckBox checkBox;
 	
@@ -35,44 +40,57 @@ public class MainFrame extends JFrame{
 		
 		super(name);
 		
-		/*
-		 * Init the frame with its attributes
-		 */
-		initFrame();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = dim.getWidth();
+		double height = dim.getHeight();
 		
-		/*
-		 * Init the panels. Panels are containers that hold components
-		 */
-		initPanel();
-		
-		/*
-		 * Init the text fields
-		 */
-		initTextField();
-		
-		/*
-		 * Init the buttons
-		 */
-		initButtons();
-		
-		/*
-		 * Init the checkbox
-		 */
-		initCheckBox();
-		
-		/*
-		 * Pack everything together
-		 */
-		packing();
-		
-		setVisible(true);
-		
-		
+		if(!(width == 1920) || !(height == 1080)) {
+			JOptionPane.showMessageDialog(this, "The resolution must be 1920x1080!", "Wrong resolution", JOptionPane.WARNING_MESSAGE);
+		} else {
+			
+			/*
+			 * Init the frame with its attributes
+			 */
+			initFrame();
+			
+			/*
+			 * Init the panels. Panels are containers that hold components
+			 */
+			initPanel();
+			
+			/*
+			 * Init the text fields
+			 */
+			initTextField();
+			
+			/*
+			 * Init the labels
+			 */
+			initLabel();
+			
+			/*
+			 * Init the buttons
+			 */
+			initButtons();
+			
+			/*
+			 * Init the checkbox
+			 */
+			initCheckBox();
+			
+			/*
+			 * Pack everything together
+			 */
+			packing();
+			
+			setVisible(true);
+		}
+
 	}
 	
 	private void initFrame() {
 		
-		setSize(300,150);
+		setSize(350,150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -82,7 +100,9 @@ public class MainFrame extends JFrame{
 	
 	private void initPanel() {
 		
-		/* By default the layout is FlowLayout */
+		/*
+		 * By default, the layout is FlowLayout
+		 */
 		firstPanel = new JPanel();
 		secondPanel = new JPanel();
 		thirdPanel = new JPanel();
@@ -93,6 +113,13 @@ public class MainFrame extends JFrame{
 		
 		field1 = new JTextField(20);
 		field2 = new JTextField(20);
+		
+	}
+	
+	private void initLabel() {
+		
+		label1 = new JLabel("Base");
+		label2 = new JLabel("Exponent");
 		
 	}
 	
@@ -139,16 +166,20 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void updateFrame() {
+		
 		repaint();
 		revalidate();
+		
 	}
 	
 	private void packing() {
 		
+		firstPanel.add(label1);
 		firstPanel.add(field1);
 		firstPanel.add(executeButton);
 		add(firstPanel,BorderLayout.NORTH);
 		
+		secondPanel.add(label2);
 		secondPanel.add(field2);
 		secondPanel.add(checkBox);
 		add(secondPanel,BorderLayout.CENTER);

@@ -6,10 +6,6 @@ public class Result {
 	private double exponent;
 	private double result = 0;
 	
-	public Result() {
-	
-	}
-	
 	public void setBase(double nr) {
 		this.base = nr;
 	}
@@ -19,9 +15,7 @@ public class Result {
 	}
 	
 	public double compute() {
-		
 		return Math.pow(base, exponent);
-		
 	}
 	
 	public double getResult() {
